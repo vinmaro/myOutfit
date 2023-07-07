@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>MyOutfit</ion-title>
+    <ion-buttons slot="secondary">
+      <ion-button
+        color="medium"
+        class="hanger-btn-container"
+        fill="clear"
+        (click)="goToOutfit()"
+      >
+        <ion-icon class="hanger"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-align-items-center">
+      <ion-col>
+        <div class="outfit-btn-container" (click)="createNewOutfit()">
+          <ion-button color="warning" class="round" slot="icon-only">
+            <ion-icon slot="icon-only" name="shirt"></ion-icon>
+          </ion-button>
+          <ion-label size="small">Tocca per creare un outfit</ion-label>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-align-items-center">
+      <ion-col>
+        <div class="camera-btn-container">
+          <ion-button
+            color="warning"
+            class="round"
+            (click)="presentActionSheet()"
+          >
+            <ion-icon name="camera"></ion-icon>
+          </ion-button>
+          <ion-label size="small" size="large">
+            Tocca per caricare un vestito
+          </ion-label>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

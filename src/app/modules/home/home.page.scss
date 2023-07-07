@@ -1,0 +1,53 @@
+ion-toolbar {
+  display: flex;
+  justify-content: space-around;
+    align-items: center;
+}
+
+ion-title {
+  width: 8em;
+}
+
+.hanger-btn-container {
+  height: 10vh;
+  margin-left: 18em;
+  .hanger {
+    mask-image: url(../../../assets/icon/hanger.svg);
+    mask-size: contain;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    background: currentColor;
+    background-color: #000;
+    font-size: 37px;
+  }
+}
+
+.outfit-btn-container {
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30%;
+  .round {
+    display: block;
+    width: 10em;
+    height: 10em;
+    --border-radius: 50%;
+  }
+}
+
+.camera-btn-container {
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 27%;
+  .round {
+    display: block;
+    width: 4em;
+    height: 4em;
+    --border-radius: 70%;
+  }
+}

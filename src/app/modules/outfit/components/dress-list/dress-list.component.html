@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button class="ion-float-left" (click)="dismiss()" fill="clear">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+    </ion-button>
+    <ion-title>Aggiungi Abbigliamento</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngFor="let category of categories">
+    <ion-list-header>
+      {{ category.name }}
+    </ion-list-header>
+    <ng-container *ngFor="let dress of dresses">
+      <ion-item
+        (click)="onSelectedItem(dress)"
+        *ngIf="getIsShowable(category, dress)"
+      >
+        <ion-avatar slot="start">
+          <img
+            [src]="
+              dress.img && dress.img !== '' ? dress.img : '/assets/image.png'
+            "
+          />
+        </ion-avatar>
+        <ion-label>
+          <h2>{{ dress.name }}</h2>
+        </ion-label>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+</ion-content>
