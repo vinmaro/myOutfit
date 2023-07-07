@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button class="ion-float-left z-20" (click)="goBack()" fill="clear">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+    </ion-button>
+    <ion-title class="title">{{ dressTypes[dressType] }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="card-background-page">
+  <div class="center">
+    <ng-container *ngIf="dresses.length">
+      <ion-list *ngFor="let dress of dresses">
+        <ion-item
+          class="vertical-card"
+          lines="none"
+          (click)="openDetail(dress)"
+        >
+          <ion-card>
+            <img [src]="dress?.img || '/assets/image.png'" />
+            <div class="card-title">{{dress.name}}</div>
+          </ion-card>
+        </ion-item>
+      </ion-list>
+    </ng-container>
+    <p *ngIf="!dresses.length" class="no-item">
+      non hai ancora inserito {{ dressTypes[dressType] | lowercase }}
+    </p>
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="openDetail()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

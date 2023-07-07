@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="title">News</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscren>
+  <ion-list>
+    <ng-container *ngFor="let article of articles">
+      <ion-item (click)="openDetail(article)">
+        <ion-avatar slot="start">
+          <img [src]="article.urlToImage" />
+        </ion-avatar>
+        <ion-label>
+          <h2>{{article.title}}</h2>
+          <h3>{{article.source.name}}</h3>
+          <p>{{article.content}}</p>
+        </ion-label>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="getNews($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Caricamento news..."
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

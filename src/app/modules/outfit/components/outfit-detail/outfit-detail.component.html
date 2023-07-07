@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button class="ion-float-left z-20" (click)="dismiss()" fill="clear">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+    </ion-button>
+    <ion-title>
+      {{ isWritable ? "Nuovo Outfit" : selectedOutfit.name || "" }}
+    </ion-title>
+    <ion-button
+      class="ion-float-right"
+      (click)="removeOutfit()"
+      *ngIf="!isWritable"
+      ><ion-icon name="trash"></ion-icon
+    ></ion-button>
+    <ion-button
+      class="ion-float-right"
+      (click)="toggleEdit()"
+      *ngIf="!isWritable"
+      fill="clear"
+    >
+      <ion-icon
+        name="pencil-outline"
+        *ngIf="!this.outfitForm.enabled"
+      ></ion-icon>
+      <ion-icon name="close" *ngIf="this.outfitForm.enabled"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row class="ion-justify-content-center">
+    <form [formGroup]="outfitForm" (ngSubmit)="updateOrCreate()">
+      <ion-row class="ion-justify-content-center">
+        <ion-avatar
+          (click)="this.outfitForm.enabled ? presentActionSheet() : undefined"
+          class="avatar"
+        >
+          <img [src]="outfitForm.value.img || '/assets/image.png'" />
+        </ion-avatar>
+      </ion-row>
+      <div class="ion-text-center">
+        <h1 size="large">Attributi</h1>
+      </div>
+      <ion-item>
+        <ion-label>Nome:</ion-label>
+        <ion-input formControlName="name" type="text"></ion-input>
+      </ion-item>
+    </form>
+  </ion-row>
+
+  <div *ngIf="selectedDresses">
+    <ng-container *ngFor="let dress of selectedDresses">
+      <swiper-slide class="flex vertical-cards ion-padding ion-justify-content-center" direction="vertical">
+        <ion-card>
+          <ion-img
+            [src]="dress.img && dress.img ? dress.img : '/assets/image.png'"
+          ></ion-img>
+          <ion-button
+            *ngIf="this.outfitForm.enabled"
+            class="ion-float-right z-20 black"
+            (click)="removeElement(dress.id ?? '')"
+            ><ion-icon name="trash"></ion-icon
+          ></ion-button>
+          <ion-card-header>
+            <ion-card-title>{{ dress.name }}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </swiper-slide>
+    </ng-container>
+  </div>
+</ion-content>
+
+<ion-row *ngIf="this.outfitForm.enabled">
+  <ion-col size="6">
+    <ion-button color="secondary" (click)="openDetail()" expand="full">
+      Gestisci Abiti
+    </ion-button>
+  </ion-col>
+  <ion-col size="6">
+    <ion-button class="footer-button" (click)="updateOrCreate()" expand="full">
+      Salva
+    </ion-button>
+  </ion-col>
+</ion-row>

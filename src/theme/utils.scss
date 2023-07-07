@@ -1,0 +1,12 @@
+.no-item {
+  color: grey;
+  display: flex;
+  justify-content: center;
+  height: 70vh;
+  align-items: center;
+}
+
+.z-20 {
+  z-index: 20;
+  position: relative;
+}

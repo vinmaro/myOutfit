@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button class="ion-float-left z-20" (click)="goBack()" fill="clear">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+    </ion-button>
+    <ion-title>Outfit</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="card-background-page">
+  <div class="center">
+    <ng-container *ngIf="outfits.length">
+      <ion-list *ngFor="let outfit of outfits">
+        <ion-item
+          class="vertical-card"
+          lines="none"
+          (click)="openDetail(false, outfit)"
+        >
+          <ion-card>
+            <img [src]="outfit?.img || '/assets/image.png'" />
+            <div class="card-title">{{outfit.name}}</div>
+          </ion-card>
+        </ion-item>
+      </ion-list>
+    </ng-container>
+    <p *ngIf="!outfits.length" class="no-item">
+      non hai ancora inserito nessun outfit
+    </p>
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="openDetail(true)">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

@@ -1,0 +1,98 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="dismiss()" fill="clear">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      {{ isWritable ? 'Nuovo Vestito' : selectedDress.name || '' }}
+    </ion-title>
+    <ion-button
+      slot="end"
+      (click)="toggleEdit()"
+      *ngIf="!isWritable"
+      fill="clear">
+      <ion-icon name="pencil-outline"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-avatar
+        class="avatar"
+        (click)="this.dressForm.enabled ? presentActionSheet() : undefined">
+        <img [src]="dressForm.value.img || '/assets/image.png'" />
+      </ion-avatar>
+    </ion-row>
+
+    <div class="ion-text-center">
+      <h1 size="large">Attributi</h1>
+    </div>
+
+    <form [formGroup]="dressForm" (ngSubmit)="updateOrCreate()">
+      <ion-item>
+        <ion-label position="floating">Nome</ion-label>
+        <ion-input formControlName="name" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Colori</ion-label>
+        <ion-select formControlName="color" multiple="true">
+          <ion-select-option [value]="ColorEnum.BLACK">Nero</ion-select-option>
+          <ion-select-option [value]="ColorEnum.BLUE">Blu</ion-select-option>
+          <ion-select-option [value]="ColorEnum.BROWN">Marrone</ion-select-option>
+          <ion-select-option [value]="ColorEnum.GREEN">Verde</ion-select-option>
+          <ion-select-option [value]="ColorEnum.RED">Rosso</ion-select-option>
+          <ion-select-option [value]="ColorEnum.WHITE">Bianco</ion-select-option>
+          <ion-select-option [value]="ColorEnum.YELLOW">Giallo</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Stagione</ion-label>
+        <ion-select
+          formControlName="season"
+          placeholder="Seleziona una Stagione">
+          <ion-select-option [value]="SeasonEnum.WINTER">Inverno</ion-select-option>
+          <ion-select-option [value]="SeasonEnum.SPRING">Primavera</ion-select-option>
+          <ion-select-option [value]="SeasonEnum.SUMMER">Estate</ion-select-option>
+          <ion-select-option [value]="SeasonEnum.AUTUMN">Autunno</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Tipologia</ion-label>
+        <ion-select
+          (ionChange)="handleChange($event)"
+          formControlName="dressType"
+          placeholder="Seleziona una tipologia">
+          <ion-select-option [value]="DressTypeEnum.ACCESSORIES">Accessorio</ion-select-option>
+          <ion-select-option [value]="DressTypeEnum.CLOTHES">Capo</ion-select-option>
+          <ion-select-option [value]="DressTypeEnum.SHOES">Scarpa</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item *ngIf="dressForm?.value?.dressType === DressTypeEnum.CLOTHES" class="mb-50">
+        <ion-label position="floating">Tipologia Vestito</ion-label>
+        <ion-select
+          formControlName="clothesType"
+          placeholder="Seleziona un'opzione">
+          <ion-select-option [value]="ClothesTypeEnum.TOP">Parte di sopra</ion-select-option>
+          <ion-select-option [value]="ClothesTypeEnum.BOTTOM">Parte di sotto</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </form>
+
+    <ion-row class="ion-justify-content-center">
+      <ion-button
+        class="save-button"
+        (click)="updateOrCreate()"
+        *ngIf="this.dressForm.valid">
+        Salva
+      </ion-button>
+    </ion-row>
+  </ion-grid>
+</ion-content>

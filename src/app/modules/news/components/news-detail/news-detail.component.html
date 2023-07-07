@@ -1,0 +1,20 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>{{ article.title }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()" fill="clear">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen class="ion-padding">
+  <img [src]="article.urlToImage" />
+  <h2>{{ article.title }}</h2>
+
+  <ion-item-divider> </ion-item-divider>
+  <h2>{{ article.author }}</h2>
+  <h4>{{ article.publishedAt }}</h4>
+  <p>{{ article.content }}</p>
+  <p>{{ article.description }}</p>
+</ion-content>
