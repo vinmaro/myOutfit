@@ -24,9 +24,7 @@ export class HomePage implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {
-    console.log("AAA")
-  }
+  ngOnInit() {}
 
   /**
    * Go to "Dresses" page
